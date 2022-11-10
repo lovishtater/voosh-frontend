@@ -47,7 +47,7 @@ export default function CreateOrder() {
       });
     setLoading(false);
   };
-  
+
   return (
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
@@ -65,37 +65,60 @@ export default function CreateOrder() {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
+                <label htmlFor="st" className="sr-only">
+                  Sub Type
                 </label>
                 <input
-                  id="email-address"
+                  id="st"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
+                  onChange={handleChange("sub_type")}
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Email address"
                 />
               </div>
               <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
+                <label htmlFor="phoneNumber" className="sr-only">
+                  Phone Number
                 </label>
                 <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  type="text"
+                  autoComplete="phoneNumber"
                   required
-                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Password"
+                  onChange={handleChange("phoneNumber")}
+                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="Phone Number"
                 />
-              </div>
+                </div>
+                <div>
+                <label htmlFor="address" className="sr-only">
+                  Address
+                </label>
+                <input
+
+                  id="address"
+                  name="address"
+                  type="text"
+                  autoComplete="address"
+                  required
+                  onChange={handleChange("address")}
+                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="Address"
+                />
             </div>
+            </div>
+            { error && <div className="text-red-500 text-center">error</div>}
+            { success && <div className="text-green-500 text-center">Order Created Successfully</div>}
+            { loading && <div className="text-green-500 text-center">Loading...</div>}
 
             <div>
-              <button className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <button
+              onClick={onSubmit}
+              className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 Create an Order
               </button>
             </div>
