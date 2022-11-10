@@ -6,11 +6,12 @@ const AllOrder = () => {
     const [orders, setOrders] = React.useState([]);
     const user = JSON.parse(localStorage.getItem("user")) || {_id: "636bb65836bdd97b04b85783"}
     React.useEffect(() => {
-        fetch(`${API}/get-order/${user._id}`, {
+        fetch(`${API}/get-order/${user.user._id}`, {
             method: "GET",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
+                "Authorization": "Bearer " + user.token
             },
         })
             .then((res) => res.json())

@@ -1,6 +1,53 @@
 import {LockClosedIcon} from "@heroicons/react/20/solid";
-
+import {useState} from "react";
 export default function CreateOrder() {
+  const [order , setOrder] = useState({
+    user_id : localStorage.getItem("vooshUser") ? JSON.parse(localStorage.getItem("vooshUser")).user._id : "",
+    sub_type : "",
+    phoneNumber : "",
+    address : "",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  
+  const handleChange = name => event => {
+    setError("");
+    setOrder({...order , [name] : event.target.value});
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+    fetch(`${API}/add-order`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Authorization" : `Bearer ${JSON.parse(localStorage.getItem("vooshUser")).token}`
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+          setLoading(false);
+        } else {
+          setSuccess(true);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        setError(err);
+        setLoading(false);
+      });
+    setLoading(false);
+  };
+  
   return (
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
