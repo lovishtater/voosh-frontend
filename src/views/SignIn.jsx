@@ -2,7 +2,10 @@
 import {LockClosedIcon} from "@heroicons/react/20/solid";
 import {API} from "../backend"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function Signin() {
+    const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -19,8 +22,8 @@ export default function Signin() {
 
   };
 
-  const onSubmit = event => {
-    event.preventDefault();
+  const onclick = () => {
+    console.log("clicked");
     setError("");
     setLoading(true);
     fetch(`${API}/loginUser`, {
@@ -40,7 +43,7 @@ export default function Signin() {
           setLoading(false);
         } else {
           localStorage.setItem("vooshUser", JSON.stringify(data));
-          alert("User signed in successfully");
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -113,18 +116,16 @@ export default function Signin() {
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
                 </a>
               </div>
             </div>
-            {error && (
-            <div className="error-box text-red-500 text-center">{error}</div>
-          )}
+            {error && <div className="error-box text-red-500 text-center">{error}</div>}
 
             <div>
               <button
-                onChange={onSubmit}
+                onClick={() => onclick()}
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
