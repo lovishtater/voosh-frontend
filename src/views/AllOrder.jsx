@@ -30,8 +30,8 @@ const AllOrder = () => {
     }, []);
 
   return (
-    <div>
-      <div class="hidden md:table md:w-full border">
+    <div className="p-2">
+      <div class=" border">
         <div class="table-row bg-teal-600">
           {header.map((item, index) => (
             <div class="table-cell py-2 px-4 text-white">{item}</div>
@@ -46,7 +46,7 @@ const AllOrder = () => {
         ))}
       </div>
 
-      <div class="flex flex-col md:hidden p-4">
+      {/* <div class="flex flex-col md:hidden p-4">
         {orders.map((item, index) => (
           <div class="rounded shadow w-full p-3 my-3">
             <div class="flex flex-row justify-between">
@@ -58,7 +58,7 @@ const AllOrder = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
