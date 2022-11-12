@@ -1,25 +1,29 @@
 import {Fragment} from "react";
 import {Popover, Transition} from "@headlessui/react";
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  BookmarkSquareIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  CursorArrowRaysIcon,
-  LifebuoyIcon,
-  PhoneIcon,
-  PlayIcon,
-  ShieldCheckIcon,
-  Squares2X2Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {ChevronDownIcon} from "@heroicons/react/20/solid";
 import {useNavigate} from "react-router-dom";
 
 
 export default function Example() {
   const navigate = useNavigate();
+  const isSignedIn = localStorage.getItem("vooshUser");
+
+  const signout = async() => {
+    await fetch(`${API}/signout`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        localStorage.removeItem("vooshUser");
+        navigate("/signin");
+      })
+      .catch((err) => console.log(err));
+  };
+  
   return (
     <Popover className="relative bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -41,18 +45,28 @@ export default function Example() {
             </Popover.Button>
           </div>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+            {isSignedIn ? (
+              <>
             <a
               onClick={() => navigate("/signin")}
               className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-            >
+              >
               Sign in
             </a>
             <a
               onClick={() => navigate("/signup")}
               className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-            >
+              >
               Sign up
             </a>
+              </>
+            ) : (
+              <a 
+              onClick={() => signout()}
+              className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700" >
+                Sign Out
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -89,6 +103,7 @@ export default function Example() {
               </div>
             </div>
             <div className="space-y-6 py-6 px-5">
+              {isSignedIn ? (
               <div>
                 <a
                   onClick={() => navigate("/signup")}
@@ -105,6 +120,14 @@ export default function Example() {
                   </a>
                 </p>
               </div>
+              ) : (
+                <a
+                onClick={() => signout()}
+                className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+              >
+                Sign out
+              </a>
+              )}
             </div>
           </div>
         </Popover.Panel>
