@@ -26,7 +26,7 @@ export default function Signin() {
     console.log("clicked");
     setError("");
     setLoading(true);
-    fetch(`${API}/loginUser`, {
+    fetch(`${API}/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",

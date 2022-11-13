@@ -31,34 +31,34 @@ const AllOrder = () => {
 
   return (
     <div className="p-2">
-      <div class=" border">
-        <div class="table-row bg-teal-600">
+      {/* <div class="border">
+        <div class="flex table-row bg-teal-600">
           {header.map((item, index) => (
             <div class="table-cell py-2 px-4 text-white">{item}</div>
           ))}
         </div>
         {orders.map((item, index) => (
-          <div class="table-row">
+          <div class="flex table-row">
             <div class="table-cell py-2 px-3">{item.sub_type}</div>
             <div class="table-cell py-2 px-3">{item.phoneNumber}</div>
-            <div class="table-cell py-2 px-3">{item.Address}</div>
+            <div class="table-cell py-2 px-3">{item.address}</div>
           </div>
         ))}
-      </div>
+      </div> */}
 
-      {/* <div class="flex flex-col md:hidden p-4">
+      <div class="flex flex-col p-4">
         {orders.map((item, index) => (
           <div class="rounded shadow w-full p-3 my-3">
             <div class="flex flex-row justify-between">
               <h3 class="text-xl font-bold">{item.sub_type}</h3>
-              <h3 class="text-xl font-bold">${item.phoneNumber}</h3>
+              <h3 class="text-xl ">{item.phoneNumber}</h3>
             </div>
             <div class="text-left">
-              <p>{item.Address}</p>
+              <p>{item.address}</p>
             </div>
           </div>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {useNavigate} from "react-router-dom";
-
+import {API} from "../backend";
 
 export default function Example() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function Example() {
       })
       .catch((err) => console.log(err));
   };
-  
+
   return (
     <Popover className="relative bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -45,7 +45,7 @@ export default function Example() {
             </Popover.Button>
           </div>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-            {isSignedIn ? (
+            {!isSignedIn ? (
               <>
             <a
               onClick={() => navigate("/signin")}
@@ -103,7 +103,7 @@ export default function Example() {
               </div>
             </div>
             <div className="space-y-6 py-6 px-5">
-              {isSignedIn ? (
+              {!isSignedIn ? (
               <div>
                 <a
                   onClick={() => navigate("/signup")}

@@ -3,7 +3,7 @@ import {useState} from "react";
 import {API} from "../backend";
 export default function CreateOrder() {
   const [order , setOrder] = useState({
-    user_id : localStorage.getItem("vooshUser") ? JSON.parse(localStorage.getItem("vooshUser")).user._id : "",
+    user_id : localStorage.getItem("vooshUser") ? JSON.parse(localStorage.getItem("vooshUser"))?.user?._id : "",
     sub_type : "",
     phoneNumber : "",
     address : "",
